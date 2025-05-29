@@ -1,0 +1,5 @@
+{
+  "name": "AI Multimedia Studio Pro",
+  "description": "An advanced application for generating and analyzing multimedia content using AI, including text-to-image, image-to-text, video-to-text, AI Chat, and Google Search Grounded Q&A functionalities.",
+  "requestFramePermissions": []
+}

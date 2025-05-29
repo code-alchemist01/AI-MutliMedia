@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"> {/* Default to dark theme, class will be managed by JS */}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Multimedia Studio Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg-primary: #111827; /* Dark Gray */
+      --color-bg-secondary: #1f2937; /* Medium Dark Gray */
+      --color-bg-card: #374151; /* Lighter Gray for cards */
+      --color-bg-input: #4b5563; /* Input field background */
+      --color-text-primary: #f3f4f6; /* Light Gray / Almost White */
+      --color-text-secondary: #d1d5db; /* Gray */
+      --color-text-muted: #9ca3af; /* Muted Gray */
+      --color-accent-primary: #8b5cf6; /* Purple */
+      --color-accent-secondary: #ec4899; /* Pink */
+      --color-accent-tertiary: #f97316; /* Orange */
+      --color-border-primary: #4b5563;
+      --color-border-secondary: #6b7280;
+      --color-shadow-base: rgba(0,0,0,0.3);
+      --color-shadow-highlight: rgba(139, 92, 246, 0.3); /* Purple shadow */
+      --selection-bg: var(--color-accent-primary);
+      --selection-text: white;
+    }
+
+    html.light {
+      --color-bg-primary: #f3f4f6; /* Light Gray */
+      --color-bg-secondary: #e5e7eb; /* Lighter Gray */
+      --color-bg-card: #ffffff; /* White for cards */
+      --color-bg-input: #f9fafb; /* Very Light Gray for inputs */
+      --color-text-primary: #1f2937; /* Dark Gray */
+      --color-text-secondary: #374151; /* Medium Dark Gray */
+      --color-text-muted: #6b7280; /* Muted Gray */
+      /* Accents can remain similar or be adjusted */
+      /* --color-accent-primary: #7c3aed; */
+      /* --color-accent-secondary: #db2777; */
+      /* --color-accent-tertiary: #ea580c; */
+      --color-border-primary: #d1d5db;
+      --color-border-secondary: #9ca3af;
+      --color-shadow-base: rgba(0,0,0,0.1);
+      --color-shadow-highlight: rgba(139, 92, 246, 0.15);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg-secondary); 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-accent-primary); 
+      border-radius: 5px;
+      border: 2px solid var(--color-bg-secondary);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-accent-secondary); 
+    }
+
+    ::selection {
+      background-color: var(--selection-bg);
+      color: var(--selection-text);
+    }
+    
+    @keyframes subtle-sparkle-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    .animate-subtle-sparkle-pulse {
+      animation: subtle-sparkle-pulse 3s infinite ease-in-out;
+    }
+
+    /* Tailwind dark mode integration */
+    .dark .dark\:bg-dark-primary { background-color: var(--color-bg-primary); }
+    .dark .dark\:bg-dark-secondary { background-color: var(--color-bg-secondary); }
+    .dark .dark\:bg-dark-card { background-color: var(--color-bg-card); }
+    .dark .dark\:text-dark-primary { color: var(--color-text-primary); }
+    .dark .dark\:text-dark-secondary { color: var(--color-text-secondary); }
+    .dark .dark\:border-dark-primary { border-color: var(--color-border-primary); }
+
+    /* Light mode specific styles (can be prefixed with .light or rely on defaults if dark uses overrides) */
+    .light .light\:bg-light-primary { background-color: var(--color-bg-primary); }
+    .light .light\:bg-light-secondary { background-color: var(--color-bg-secondary); }
+    .light .light\:bg-light-card { background-color: var(--color-bg-card); }
+    .light .light\:text-light-primary { color: var(--color-text-primary); }
+    .light .light\:text-light-secondary { color: var(--color-text-secondary); }
+    .light .light\:border-light-primary { border-color: var(--color-border-primary); }
+
+    /* General component styling using CSS variables */
+    .bg-themed-primary { background-color: var(--color-bg-primary); }
+    .bg-themed-secondary { background-color: var(--color-bg-secondary); }
+    .bg-themed-card { background-color: var(--color-bg-card); }
+    .bg-themed-input { background-color: var(--color-bg-input); }
+    .text-themed-primary { color: var(--color-text-primary); }
+    .text-themed-secondary { color: var(--color-text-secondary); }
+    .text-themed-muted { color: var(--color-text-muted); }
+    .border-themed-primary { border-color: var(--color-border-primary); }
+    .border-themed-secondary { border-color: var(--color-border-secondary); }
+    .shadow-themed-base { box-shadow: 0 4px 6px -1px var(--color-shadow-base), 0 2px 4px -1px var(--color-shadow-base); }
+    .shadow-themed-highlight:hover { box-shadow: 0 10px 15px -3px var(--color-shadow-highlight), 0 4px 6px -2px var(--color-shadow-highlight); }
+
+    .btn-primary {
+      background-image: linear-gradient(to right, var(--color-accent-primary), var(--color-accent-secondary), var(--color-accent-tertiary));
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      transform: scale(1.02);
+    }
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(50%);
+    }
+    .btn-secondary {
+      background-color: var(--color-bg-input);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border-primary);
+    }
+    .btn-secondary:hover {
+      background-color: var(--color-border-primary);
+    }
+    
+    .nav-button {
+      background-color: var(--color-bg-card);
+      color: var(--color-text-secondary);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+    .nav-button:hover {
+      background-color: var(--color-border-primary);
+      color: var(--color-text-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px var(--color-shadow-base);
+    }
+    .nav-button.active {
+      background-image: linear-gradient(to right, var(--color-accent-primary), var(--color-accent-secondary));
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 6px 12px var(--color-shadow-highlight);
+      transform: scale(1.05);
+    }
+    .form-input {
+      background-color: var(--color-bg-input);
+      border: 1px solid var(--color-border-primary);
+      color: var(--color-text-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--color-accent-primary);
+      box-shadow: 0 0 0 2px var(--color-shadow-highlight);
+    }
+    
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.1.0"
+  }
+}
+</script>
+</head>
+<body class="bg-themed-primary text-themed-primary">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html><link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>
